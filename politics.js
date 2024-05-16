@@ -54,3 +54,61 @@ let questions = [
       "17th Lok Sabha"
     ]
   },
+
+  {
+    numb: 6,
+    question: "The Parliament of India can make use of the residuary powers",
+    answer: "at all times",
+    options: [
+      "at all times",
+      "only during national emergency",
+      "during national emergency as well as constitutional emergency as well in a state",
+      "None of the above"
+    ]
+  },
+  {
+    numb: 7,
+    question: "The members of Lok Sabha hold office for a term of",
+    answer: "5 years",
+    options: [
+      "4 years",
+      "5 years",
+      "6 years",
+      "3 years"
+    ]
+  },
+  {
+    numb: 8,
+    question: "The number of writs that can be prayed for and issued by the Supreme Court and/or a High Court is",
+    answer: "5",
+    options: [
+      "3",
+      "4",
+      "5",
+      "6"
+    ]
+  },
+  {
+    numb: 9,
+    question: "The minimum age to qualify for election to the Lok Sabha is",
+    answer: "25 years",
+    options: [
+      "25 years",
+      "21 years",
+      "18 years",
+      "35 years"
+    ]
+  },
+  {
+    numb: 10,
+    question: "The pension of a high court judge is charged to the",
+    answer: "Consolidated Fund of India",
+    options: [
+      "Consolidated Fund of India",
+      "Consolidated Fund of the state where he last served",
+      "Consolidated Funds of the different states where he has served",
+      "Contingency Fund of India"
+    ]
+  },
+];
+
