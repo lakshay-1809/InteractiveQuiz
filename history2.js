@@ -113,3 +113,107 @@ function showQuetions(index){
 
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+
+function optionSelected(answer){
+    clearInterval(counter); 
+    clearInterval(counterLine); 
+    let userAns = answer.textContent;
+    let correcAns = questions[que_count].answer; 
+    const allOptions = option_list.children.length;
+    
+    if(userAns == correcAns){ 
+        userScore += 1; 
+        answer.classList.add("correct");
+        answer.insertAdjacentHTML("beforeend", tickIconTag);
+        console.log("Correct Answer");
+        console.log("Your correct answers = " + userScore);
+    }else{
+        answer.classList.add("incorrect"); 
+        answer.insertAdjacentHTML("beforeend", crossIconTag); 
+        console.log("Wrong Answer");
+
+        for(i=0; i < allOptions; i++){
+            if(option_list.children[i].textContent == correcAns){  
+                option_list.children[i].setAttribute("class", "option correct"); 
+                option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); 
+                console.log("Auto selected correct answer.");
+            }
+        }
+    }
+    for(i=0; i < allOptions; i++){
+        option_list.children[i].classList.add("disabled"); 
+    }
+    next_btn.classList.add("show"); 
+}
+
+function showResult(){
+    info_box.classList.remove("activeInfo");
+    quiz_box.classList.remove("activeQuiz");
+    result_box.classList.add("activeResult");
+ 
+    const scoretext = document.querySelector(".score-text");
+    scoretext.textContent = `Your Score ${userScore} out of ${questions.length}`;
+    
+    const circularprogress = document.querySelector(".progress-bar");
+    const progressValue = document.querySelector(".progress-value");
+    let progressStartValue = -1;
+    let progressEndvalue = (userScore / questions.length) * 100;
+    let speed = 20;
+
+    let progress = setInterval(() => {
+        progressStartValue++;
+        // console.log(progressStartValue);
+        progressValue.textContent = `${progressStartValue}%`;
+        circularprogress.style.background = `conic-gradient(#c40094 ${progressStartValue * 3.6}deg, rgba(255, 255, 255, .1) 0deg)`;
+        
+        if (progressStartValue == progressEndvalue) {
+            clearInterval(progress);
+        }
+    }, speed);    
+}
+
+function startTimer(time){
+    counter = setInterval(timer, 1000);
+    function timer(){
+        timeCount.textContent = time; 
+        time--;
+        if(time < 9){ 
+            let addZero = timeCount.textContent; 
+            timeCount.textContent = "0" + addZero; 
+        }
+        if(time < 0){ 
+            clearInterval(counter); 
+            timeText.textContent = "Time Off"; 
+            const allOptions = option_list.children.length; 
+            let correcAns = questions[que_count].answer; 
+            for(i=0; i < allOptions; i++){
+                if(option_list.children[i].textContent == correcAns){ 
+                    option_list.children[i].setAttribute("class", "option correct"); 
+                    option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); 
+                    console.log("Time Off: Auto selected correct answer.");
+                }
+            }
+            for(i=0; i < allOptions; i++){
+                option_list.children[i].classList.add("disabled");
+            }
+            next_btn.classList.add("show"); 
+        }
+    }
+}
+
+function startTimerLine(time){
+    counterLine = setInterval(timer, 29);
+    function timer(){
+        time += 1;
+        time_line.style.width = time + "px"; 
+        if(time > 549){ 
+            clearInterval(counterLine); 
+        }
+    }
+}
+
+function queCounter(index){
+    let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
+    bottom_ques_counter.innerHTML = totalQueCounTag;  
+}
+
